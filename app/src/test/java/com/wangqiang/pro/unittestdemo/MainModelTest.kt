@@ -10,17 +10,28 @@ import org.junit.Test
  */
 class MainModelTest {
     private lateinit var mainModel: MainModel
-    private lateinit var errorAccounts: List<String>
-    private lateinit var rightAccounts: List<String>
+    //用于验证用户名的合法校验
+    private lateinit var errorCheckAccounts: List<String>
+    //用于验证非法登陆账户
+    private lateinit var errorLoginAccounts: List<String>
+    //用于验证合法登陆账户
+    private lateinit var rightLoginAccounts: List<String>
 
     @Before
     fun setUp() {
-        errorAccounts = listOf(
+        errorCheckAccounts = listOf(
                 "!@#", "123",
+                "123", "123",
+                "admin2", "admin",
+                "用户", "123456"
+        )
+
+        errorLoginAccounts = listOf(
                 "123", "123",
                 "admin", "1234",
                 "用户", "123456")
-        rightAccounts = listOf(
+
+        rightLoginAccounts = listOf(
                 "admin", "123456"
         )
         mainModel = MainModel()
@@ -28,19 +39,22 @@ class MainModelTest {
 
     @Test
     fun doLoginTest() {
-
-        for (i in errorAccounts.indices step 2) {
-            mainModel.doLogin(errorAccounts[i], errorAccounts[i + 1]).apply {
+        for (i in errorCheckAccounts.indices step 2) {
+            mainModel.doLogin(errorCheckAccounts[i], errorCheckAccounts[i + 1]).apply {
                 Assert.assertFalse(this.state)
             }
         }
 
-        for (i in rightAccounts.indices step 2) {
-            mainModel.doLogin(rightAccounts[i], rightAccounts[i + 1]).apply {
+        for (i in errorLoginAccounts.indices step 2) {
+            mainModel.doLogin(errorLoginAccounts[i], errorLoginAccounts[i + 1]).apply {
+                Assert.assertFalse(this.state)
+            }
+        }
+
+        for (i in rightLoginAccounts.indices step 2) {
+            mainModel.doLogin(rightLoginAccounts[i], rightLoginAccounts[i + 1]).apply {
                 Assert.assertTrue(this.state)
             }
         }
     }
-
-
 }

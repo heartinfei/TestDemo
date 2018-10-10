@@ -15,8 +15,9 @@ class MainModel {
     private fun checkUserName(name: String): Boolean = name.toCharArray().map {
         it.toString()
     }.filter {
-        it.matches(charRegex)
-    }.toList().isNotEmpty()
+        var r = !it.matches(charRegex)
+        return@filter r
+    }.toList().isEmpty()
 
     /**
      * 模拟登陆，
