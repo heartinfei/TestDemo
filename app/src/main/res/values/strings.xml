@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UnitTestDemo</string>
+    <string name="username">用户名（字母）</string>
+    <string name="psw">密码（数字）</string>
+    <string name="login">登陆</string>
+    <string name="login_success">Login Success</string>
+</resources>
