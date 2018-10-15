@@ -3,11 +3,14 @@ package com.wangqiang.pro.unittestdemo
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 /**
  *
  * @author 王强 on 2018/10/10 249346528@qq.com
  */
+@RunWith(JUnit4::class)
 class MainModelTest {
     private lateinit var mainModel: MainModel
     //用于验证用户名的合法校验

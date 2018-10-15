@@ -35,6 +35,7 @@ class MainActivity : MainView, AppCompatActivity() {
     }
 
     override fun onResult(result: LoginResult) {
+        startActivity(Intent(this@MainActivity, UserActivity::class.java))
         if (result.state) {
             startActivity(Intent(this@MainActivity, UserActivity::class.java))
         } else {
